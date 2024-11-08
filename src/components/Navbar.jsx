@@ -13,6 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import SendOutlinedIcon from '@mui/icons-material/SendOutlined';
+import { Link } from 'react-router-dom';
 const pages = ['About Us', 'Sign In'];
 const settings = ['Profile'];
 
@@ -56,7 +57,7 @@ function Navbar() {
               textDecoration: 'none',
             }}
           >
-            Acme Subscription Manager
+        <Link to={"/"} >Acme Subscription Manager</Link>   
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -137,7 +138,7 @@ function Navbar() {
 
 
             <Tooltip >
-              <Button sx={{color:"black", backgroundColor:"#13E611", borderRadius:"10px", marginTop:"10px", marginBottom:"10px"}} variant='contained'><strong>Start Free</strong></Button>
+              <Button sx={{color:"black", backgroundColor:"#13E611", borderRadius:"10px", marginTop:"10px", marginBottom:"10px", fontWeight:"bold"}} variant='contained'><Link to={"/Signup"}>Start Free</Link> </Button>
             </Tooltip>
             <Menu
               sx={{ mt: '45px' }}

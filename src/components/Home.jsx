@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from './NavBar'
 import { Box, Button, Paper, Typography, Toolbar } from '@mui/material'
-import { AccessTime, Dashboard, Insights, AccountCircleRounded } from '@mui/icons-material';
+import {AccountCircleRounded } from '@mui/icons-material';
 import SignalCellularAltIcon from '@mui/icons-material/SignalCellularAlt';
 import NotificationsNoneSharpIcon from '@mui/icons-material/NotificationsNoneSharp';
 import MonetizationOnRoundedIcon from '@mui/icons-material/MonetizationOnRounded';
