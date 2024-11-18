@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 const pages = ['About Us', 'Sign In'];
 const settings = ['Profile'];
 
-function Navbar() {
+function Navbar2() {
 
 
   return (
@@ -57,4 +57,4 @@ function Navbar() {
     </AppBar>
   );
 }
-export default Navbar;
+export default Navbar2;

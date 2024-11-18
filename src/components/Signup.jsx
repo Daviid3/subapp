@@ -1,4 +1,4 @@
-import { Container, styled, Paper, Typography,Box, TextField, Button,ListItem,List, Checkbox, Icon, IconButton } from '@mui/material'
+import { Container, styled, Paper, Typography,Box, TextField, Button} from '@mui/material'
 import axios from 'axios'
 import React, { useState } from 'react'
 import Navbar from './NavBar'
@@ -10,40 +10,51 @@ const StyledPaper = styled(Paper)(({theme})=>({
     })) 
 
 
-const API_BASE_URL = "https://jsonplaceholder.typicode.com/"
-const api = axios.create({
-    baseURL:API_BASE_URL,
-    headers:{
-        "Content-Type":"application/json"
-    }
-})
+const initialstate = {
+          FirstName:"",
+          LastName:"",
+          Email:"",
+          Password:"",
+        }
+
+
 function Signup() {
-const [Post, setPost] = useState({
-    FirstName:"",
-    LastName:"",
-    Email:"",
-    Password:""
-})
+    const [Post, setPost] = useState(initialstate)
 console.log(Post)
 
 const handleinput = (event) => {
     setPost({...Post, [event.target.name]: event.target.value})
-    setPost({ FirstName: "", LastName: "", Email: "", Password: "" })
 }
 
-const handlesubmit= async (event) =>{
- try {
-    event.preventDefault()
-  alert("Submitted")
+const handlesubmit = async (event) => {
+    try {
+        event.preventDefault();
+        alert('Submitted');
 
-    await axios.post("https://zafrino-5e5b8bdb623d.herokuapp.com/api/auth/local/register",Post)
+        const userData = {
+            firstname: Post.FirstName,
+            lastname: Post.LastName,   
+            username: `${Post.FirstName}${Post.LastName}`,
+            email: Post.Email,
+            password: Post.Password,
+        };
 
-    console.log('Registration successful', response.data);
- } catch (error) {
-    console.log(error)
-    console.error('Error during registration:', error);
- }
-}
+        console.log('Sending user data:', userData);
+
+        const response = await axios.post('https://zafrino-5e5b8bdb623d.herokuapp.com/api/auth/local/register', userData);
+
+        console.log('Registration successful', response.data);
+        alert('Registration successful!');
+    } catch (error) {
+        if (error.response && error.response.data && error.response.data.error) {
+            console.error('Error during registration:', error.response.data.error);
+            alert(`Error: ${error.response.data.error.message || 'Registration failed due to validation.'}`);
+        } else {
+            console.error('Error during registration:', error);
+            alert('An unexpected error occurred. Please try again.');
+        }
+    }
+};
 
 
   return (
@@ -75,8 +86,8 @@ const handlesubmit= async (event) =>{
     <Typography sx={{display: "flex", gap: 1,mb: 4}}variant='h8'>Password must be at least 8 characters</Typography>
     </Box>
    <Box> <Button type='submit' variant='contained' sx={{backgroundColor:"#13E611", color:"black", fontWeight:"bold"}}>Create Account</Button> </Box>
-   </form>
    <Typography sx={{ gap: 1,mt: 3}} variant='h6' gutterBottom>Already have an account? Sign In</Typography>
+   </form>
    </StyledPaper>
    
     
